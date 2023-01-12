@@ -8,12 +8,14 @@ dotenv.config();
 const app: Express = express();
 const PORT = process.env.PORT || 3001;
 
+app.use(express.json());
+
 ormConfig.initialize()
 .then(() => {
-    console.log("Data Source has been initialized!")
+    console.log("DB has been initialized!");
 })
 .catch((err) => {
-    console.error("Error during Data Source initialization", err)
+    console.error("Error during DB initialization", err);
 });
 
 app.get('/', (req: Request, res: Response) => {

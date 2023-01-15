@@ -1,6 +1,5 @@
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
-import { parse } from "path";
 
 dotenv.config();
 
@@ -11,15 +10,9 @@ const ormConfig = new DataSource({
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    logging: false,
-    synchronize: false,
-    entities: ["../modules/**/*/infrastructure/typeorm/entity/*.ts"],
-    migrations: ["../shared/infrastructure/typeorm/migrations"],
-    extra: {
-        ssl: {
-            rejectUnauthorized: false
-        }
-    }
+    logging: true,
+    migrations: ["./src/shared/infrastructure/typeorm/migrations/*.ts"],
+    entities: ["./src/modules/**/infrastructure/typeorm/entity/*.ts"]
 });
 
 export default ormConfig;

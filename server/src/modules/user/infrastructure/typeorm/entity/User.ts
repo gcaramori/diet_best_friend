@@ -16,7 +16,7 @@ class User {
     @Exclude()
     password: string;
 
-    @Column('timestamptz')
+    @Column('date')
     birth: Date;
 
     @CreateDateColumn()

@@ -1,7 +1,7 @@
-import { uuid } from "uuidv4";
-import User from "../infrastructure/typeorm/entity/User";
-import ICreateUserRepository from "./ICreateUserRepository";
-import ICreateUserDTO from "../dto/ICreateUserDTO";
+import { uuid } from 'uuidv4';
+import User from "../../infrastructure/typeorm/entity/User";
+import ICreateUserRepository from "../ICreateUserRepository";
+import ICreateUserDTO from "../../dto/ICreateUserDTO";
 
 class FakeUsersRepo implements ICreateUserRepository {
     private users: User[] = [];
@@ -14,7 +14,7 @@ class FakeUsersRepo implements ICreateUserRepository {
     }: ICreateUserDTO): Promise<User> {
         const user = new User();
 
-        Object.assign(user, {
+        Object.assign(user, {   
             id: uuid(),
             name,
             email,
@@ -26,7 +26,7 @@ class FakeUsersRepo implements ICreateUserRepository {
 
         return user;
     }
-
+    
     public async save(user: User): Promise<User> {
         const findIndex = this.users.findIndex(user => user.id === user.id);
 
@@ -48,7 +48,7 @@ class FakeUsersRepo implements ICreateUserRepository {
     }
 
     public async findAll(): Promise<User[] | undefined> {
-        const users = this.users;
+        const users = this.users;   
 
         return users;
     }

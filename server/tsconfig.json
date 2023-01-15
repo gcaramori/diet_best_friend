@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
+    "allowJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -9,6 +10,12 @@
     "outDir": "/dist",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "baseUrl": "./src",
+    "paths": {
+      "@shared/*": ["shared/*"],
+      "@modules/*": ["modules/*"],
+      "@config/*": ["config/*"] 
+    }
   }
 }

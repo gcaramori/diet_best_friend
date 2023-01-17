@@ -17,5 +17,9 @@
       "@modules/*": ["modules/*"],
       "@config/*": ["config/*"] 
     }
-  }
+  },
+  "exclude": [
+    "jest.config.ts",
+    "coverage/*"
+  ]
 }

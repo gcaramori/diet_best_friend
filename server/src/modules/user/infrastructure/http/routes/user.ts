@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
-
 import UserController from '../controller/UserController';
 
 const usersRouter = Router();
@@ -10,12 +9,10 @@ usersRouter.post('/users', celebrate({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
-    bio: Joi.string().required()
+    birth: Joi.string().required()
   }
-}, { abortEarly: false }), () => { console.log('bla') });
+}, { abortEarly: false }), UserController.create);
 
-usersRouter.get(
-  '/users'
-);
+usersRouter.get('/users', UserController.listAll);
 
 export default usersRouter;

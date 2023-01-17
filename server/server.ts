@@ -1,7 +1,10 @@
-import express, { Express, Response, Request } from 'express';
+import express, { Express, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import 'reflect-metadata';
+import { isCelebrateError } from 'celebrate';
 import ormConfig from './src/config/ormconfig';
+import routes from '@shared/infrastructure/http/routes';
+import ErrorHandler from '@shared/errors/ErrorHandler';
 
 dotenv.config();
 
@@ -9,6 +12,7 @@ const app: Express = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
+app.use(routes);
 
 ormConfig.initialize()
 .then(() => {
@@ -16,10 +20,6 @@ ormConfig.initialize()
 })
 .catch((err) => {
     console.error("Error during DB initialization", err);
-});
-
-app.get('/', (req: Request, res: Response) => {
-    res.status(200).send('Express + TypeScript Server');
 });
 
 app.listen(PORT, () => {

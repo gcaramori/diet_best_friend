@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
-import IUserRepository from '../repository/ICreateUserRepository';
+import IUserRepository from '../repository/IUserRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import User from '../infrastructure/typeorm/entity/User';
 import ErrorHandler from '../../../shared/errors/ErrorHandler';

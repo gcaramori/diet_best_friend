@@ -7,7 +7,7 @@ class ListAllUsersService {
     private userRepo: IUserRepository;
 
     constructor(
-        @inject('UserRepository') userRepo: IUserRepository
+        @inject('UserRepository') userRepo: IUserRepository,
     ) {
         this.userRepo = userRepo;
     }

@@ -2,7 +2,7 @@ import CreateUserService from "./CreateUser";
 import FakeUsersRepo from "../repository/fakes/FakeUserRepository";
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import ErrorHandler from "../../../shared/errors/ErrorHandler";
-import { describe, expect, beforeEach, it } from '@jest/globals';
+import { describe, expect, beforeEach, it } from 'vitest';
 
 let createUserService: CreateUserService;
 let fakeUsersRepo: FakeUsersRepo;

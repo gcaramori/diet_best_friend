@@ -2,7 +2,7 @@ import FakeUsersRepo from "../repository/fakes/FakeUserRepository";
 import CreateUserService from "./CreateUser";
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import ListAllUsersService from "./ListAllUsers";
-import { describe, expect, beforeEach, it } from '@jest/globals';
+import { describe, expect, beforeEach, it } from 'vitest';
 
 let listAllUsersService: ListAllUsersService;
 let createUserService: CreateUserService;
@@ -30,7 +30,7 @@ describe('list all users', () => {
             iterable.map(async index =>
                 createUserService.execute({
                     name: `user-${index}`,
-                    email: `emailteste_${index}`,
+                    email: `emailteste_${index}@gmail.com`,
                     password: `user-password-${index}`,
                     birth: new Date()
                 })

@@ -3,7 +3,7 @@ import usersRouter from '@modules/user/infrastructure/http/routes/user';
 
 const routes = Router();
 
-routes.get('/', (response: Response, request: Request) => {
+routes.get('/', (request: Request, response: Response) => {
     response.status(200).send('Welcome!');
 });
 

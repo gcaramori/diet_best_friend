@@ -1,4 +1,4 @@
-import ormConfig from "@config/ormconfig";
+import ormConfig from "../../../../ormconfig";
 
 const ConnectDB = () => {
     ormConfig.initialize()

@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import User from '../entity/User';
 import ICreateUserDTO from '../../../dto/ICreateUserDTO';
 import IUserRepository from '../../../repository/IUserRepository';
-import ormConfig from '../../../../../config/ormconfig';
+import ormConfig from '../../../../../../ormconfig';
 
 class UserRepo implements IUserRepository {
     private ormRepository: Repository<User>;

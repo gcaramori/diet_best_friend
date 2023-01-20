@@ -1,15 +1,11 @@
-import { RedisOptions } from "ioredis";
+import { REDIS_CONNECTION } from "@shared/utils/environment";
 
 interface IRedisOptions {
     driver: string,
-    config: RedisOptions
+    connection: string
 };
 
 export default {
     driver: 'redis',
-    config: {
-        host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT,
-        password: process.env.REDIS_PASSWORD
-    }
+    connection: REDIS_CONNECTION
 } as IRedisOptions;

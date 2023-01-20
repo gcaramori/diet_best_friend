@@ -7,7 +7,7 @@ class RedisCacheProvider implements ICacheProvider {
     private client: RedisClient;
     
     constructor() {
-        this.client = new Redis(RedisConfig.config);
+        this.client = new Redis(RedisConfig.connection);
     }
 
     public async save({ key, value }: ICacheProviderDTO): Promise<void> {

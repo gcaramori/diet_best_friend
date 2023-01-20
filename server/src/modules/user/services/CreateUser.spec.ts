@@ -1,21 +1,25 @@
 import CreateUserService from "./CreateUser";
 import FakeUsersRepo from "../repository/fakes/FakeUserRepository";
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
+import FakeRedisCacheProvider from "../../../shared/container/providers/CacheProvider/fakes/FakeRedisCacheProvider";
 import ErrorHandler from "../../../shared/errors/ErrorHandler";
 import { describe, expect, beforeEach, it } from 'vitest';
 
 let createUserService: CreateUserService;
 let fakeUsersRepo: FakeUsersRepo;
 let fakeHashProvider: FakeHashProvider;
+let fakeRedisCacheProvider: FakeRedisCacheProvider;
 
 describe('creating a new user', () => {
     beforeEach(() => {
         fakeUsersRepo = new FakeUsersRepo;
         fakeHashProvider = new FakeHashProvider;    
+        fakeRedisCacheProvider = new FakeRedisCacheProvider;
 
         createUserService = new CreateUserService(
             fakeUsersRepo,
-            fakeHashProvider
+            fakeHashProvider,
+            fakeRedisCacheProvider  
         );
     });
 

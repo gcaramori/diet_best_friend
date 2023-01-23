@@ -22,6 +22,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.15",
+    "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^18.11.18",
     "@types/uuidv4": "^5.0.0",
     "ts-node": "^10.9.1",
@@ -31,19 +32,20 @@
     "vitest": "^0.27.2"
   },
   "dependencies": {
-    "@types/jsonwebtoken": "^9.0.1",
     "bcrypt": "^5.1.0",
     "celebrate": "^15.0.1",
     "class-transformer": "^0.5.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
     "ioredis": "^5.2.5",
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.7.0",
     "typeorm": "^0.3.11",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^6.2.13",
+    "vite-tsconfig-paths": "^4.0.5"
   }
 }

@@ -1,4 +1,4 @@
-import { JWT_SECRET, JWT_EXPIRES } from "@shared/utils/environment";
+import { JWT_SECRET, JWT_EXPIRES } from "../shared/utils/environment";
 
 interface IAuthConfig {
     secret: string;

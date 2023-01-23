@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 import UserController from '../controller/UserController';
+import authentication from '../middlewares/Authentication';
 
 const usersRouter = Router();
 
@@ -13,6 +14,6 @@ usersRouter.post('/users', celebrate({
   }
 }, { abortEarly: false }), UserController.create);
 
-usersRouter.get('/users', UserController.listAll);
+usersRouter.get('/users', authentication, UserController.listAll);
 
 export default usersRouter;

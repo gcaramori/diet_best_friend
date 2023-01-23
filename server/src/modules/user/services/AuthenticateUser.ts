@@ -1,5 +1,5 @@
-import { sign } from 'jsonwebtoken';
 import { injectable, inject } from 'tsyringe';
+import jwt from 'jsonwebtoken';
 import User from '../infrastructure/typeorm/entity/User';
 import IUserRepository from '../repository/IUserRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
@@ -40,9 +40,9 @@ class AuthenticateUserService {
             throw new ErrorHandler('Incorrect password!', 400);
         }
 
-        const token = sign({}, authConfig.secret, {
+        const token = jwt.sign({}, authConfig.secret, {
             subject: user.id,
-            expiresIn: authConfig.expires_in 
+            expiresIn: authConfig.expires_in
         });
 
         return { user, token };

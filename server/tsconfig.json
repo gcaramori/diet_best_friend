@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
+    "moduleResolution": "node",
     "allowJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -17,9 +18,5 @@
       "@modules/*": ["modules/*"],
       "@config/*": ["config/*"] 
     }
-  },
-  "exclude": [
-    "jest.config.ts",
-    "coverage/*"
-  ]
+  }
 }

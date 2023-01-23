@@ -1,7 +1,7 @@
 import FakeUsersRepo from "../repository/fakes/FakeUserRepository";
 import CreateUserService from "./CreateUser";
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
-import FakeRedisCacheProvider from "../../../shared/container/providers/CacheProvider/fakes/FakeRedisCacheProvider";
+import FakeRedisCacheProvider from "@shared/container/providers/CacheProvider/fakes/FakeRedisCacheProvider";
 import ListAllUsersService from "./ListAllUsers";
 import { describe, expect, beforeEach, it } from 'vitest';
 

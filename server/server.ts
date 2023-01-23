@@ -1,5 +1,4 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
-import 'express-async-errors';
 import 'reflect-metadata';
 import '@shared/container';
 import { isCelebrateError } from 'celebrate';

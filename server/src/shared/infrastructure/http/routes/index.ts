@@ -10,6 +10,7 @@ routes.get('/', (request: Request, response: Response) => {
 
 routes.post('/users', usersRouter);
 routes.get('/users', usersRouter);
+routes.put('/users', usersRouter);
 
 routes.post('/session', sessionRouter);
 

@@ -15,5 +15,6 @@ usersRouter.post('/users', celebrate({
 }, { abortEarly: false }), UserController.create);
 
 usersRouter.get('/users', authentication, UserController.listAll);
+usersRouter.put('/users', authentication, UserController.update);
 
 export default usersRouter;

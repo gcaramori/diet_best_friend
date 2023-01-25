@@ -16,8 +16,20 @@ class User {
     @Exclude()
     password: string;
 
+    @Column('varchar')
+    gender: string;
+
     @Column('date')
     birth: Date;
+
+    @Column('int')
+    height: number;
+
+    @Column('varchar')
+    country: string;
+
+    @Column('varchar')
+    cep: string;
 
     @CreateDateColumn()
     created_at: Date;

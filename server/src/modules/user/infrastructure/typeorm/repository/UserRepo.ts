@@ -24,9 +24,7 @@ class UserRepo implements IUserRepository {
 
     public async findById(id: string): Promise<User | undefined> {
         const user = await this.ormRepository.findOne({
-           where: {
-            id: id
-           }
+           where: { id: id }
         }) || undefined;
     
         return user;
@@ -34,18 +32,14 @@ class UserRepo implements IUserRepository {
     
     public async findByEmail(email: string): Promise<User | undefined> {
         const user = await this.ormRepository.findOne({
-          where: {
-            email: email
-          }
+          where: { email: email }
         }) || undefined;
     
         return user;
     }
     
     public async findAll(): Promise<User[] | undefined> {
-        const users = await this.ormRepository.find({
-            select: ['id', 'name', 'email']
-        });
+        const users = await this.ormRepository.find();
 
         return users;
     }

@@ -12,7 +12,7 @@ let userRepo: FakeUserRepository;
 let hashProvider: FakeHashProvider;
 let cacheProvider: FakeRedisCacheProvider;
 
-describe('Authenticate user', () => {
+describe('authenticate user', () => {
     beforeEach(() => {
         userRepo = new FakeUserRepository;
         hashProvider = new FakeHashProvider;

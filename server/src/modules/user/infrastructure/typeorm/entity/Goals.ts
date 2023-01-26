@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToOne, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToOne, JoinColumn } from 'typeorm';
 import User from './User';
 
 @Entity('goals')
@@ -36,11 +36,9 @@ class Goals {
     @DeleteDateColumn()
     deleted_at: Date;
 
-    @OneToOne((type) => User, (user) => user.id, {
-        cascade: true
-    })
-    @JoinTable()
-    user: User[]
+    @OneToOne(type => User)
+    @JoinColumn()
+    user: User
 }
 
 export default Goals;

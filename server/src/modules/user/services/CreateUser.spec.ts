@@ -1,9 +1,9 @@
+import { describe, expect, beforeEach, it } from 'vitest';
 import CreateUserService from "./CreateUser";
 import FakeUsersRepo from "../repository/fakes/FakeUserRepository";
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import FakeRedisCacheProvider from "@shared/container/providers/CacheProvider/fakes/FakeRedisCacheProvider";
 import ErrorHandler from "@shared/errors/ErrorHandler";
-import { describe, expect, beforeEach, it } from 'vitest';
 
 let createUserService: CreateUserService;
 let fakeUsersRepo: FakeUsersRepo;

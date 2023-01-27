@@ -6,5 +6,5 @@ export default interface ICreateUserGoalsDTO {
     proteins: number,
     carbs: number,
     fats: number,
-    user_id: string
+    user: string
 }

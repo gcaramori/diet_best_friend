@@ -7,11 +7,16 @@ import UpdateUserService from '@modules/user/services/UpdateUser';
 
 class UserController {
     public async create(request: Request, response: Response): Promise<Response> {
-        const { name, email, password, birth } = request.body;
-        const createUser = container.resolve(CreateUserService);
-        const user = await createUser.execute({ name, email, password, birth });
-        
-        return response.status(200).json(instanceToInstance(user));
+        try {
+            const { name, email, password, gender, birth, height, country, cep } = request.body;
+            const createUser = container.resolve(CreateUserService);
+            const user = await createUser.execute({ name, email, password, gender, birth, height, country, cep });
+            
+            return response.status(200).json(instanceToInstance(user));
+        }
+        catch(err) {
+            return response.status(401).json(err);
+        }
     }
 
     public async update(request: Request, response: Response): Promise<Response> {

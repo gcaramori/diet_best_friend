@@ -1,20 +1,23 @@
 import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
-import UserController from '../controller/UserController';
+import UserGoalsController from '../controller/UserGoalsController';
 import authentication from '../middlewares/Authentication';
 
-const usersRouter = Router();
+const userGoalsRouter = Router();
 
-usersRouter.post('/users', celebrate({
+userGoalsRouter.post('/goals', celebrate({
   [Segments.BODY]: {
-    name: Joi.string().required(),
-    email: Joi.string().email().required(),
-    password: Joi.string().required(),
-    birth: Joi.string().required()
+    initial_weight: Joi.number().required(),
+    actual_weight: Joi.number().required(),
+    goal_weight: Joi.number().required(),
+    calories: Joi.number().required(),
+    proteins: Joi.number().required(),
+    carbs: Joi.number().required(),
+    fats: Joi.number().required(),
+    user: Joi.string().required()
   }
-}, { abortEarly: false }), UserController.create);
+}, { abortEarly: false }), UserGoalsController.create);
 
-usersRouter.get('/users', authentication, UserController.listAll);
-usersRouter.put('/users', authentication, UserController.update);
+userGoalsRouter.get('/all_goals', authentication, UserGoalsController.listAll);
 
-export default usersRouter;
+export default userGoalsRouter;

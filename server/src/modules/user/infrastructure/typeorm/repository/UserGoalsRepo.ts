@@ -31,11 +31,11 @@ class UserGoalsRepo implements IUserGoalsRepository {
     }
     
     public async findByUserId(id: string): Promise<Goals | undefined> {
-        const user = await this.ormRepository.findOne({
-           where: { id: id }
+        const userGoals = await this.ormRepository.findOne({
+           where: { user: { id: id } }
         }) || undefined;
     
-        return user;
+        return userGoals;
     }
     
     public async findAll(): Promise<Goals[] | undefined> {

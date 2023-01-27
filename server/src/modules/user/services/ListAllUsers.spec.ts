@@ -37,7 +37,11 @@ describe('list all users', () => {
                     name: `user-${index}`,
                     email: `emailteste_${index}@gmail.com`,
                     password: `user-password-${index}`,
-                    birth: new Date()
+                    gender: 'male',
+                    birth: new Date(),
+                    height: 185,
+                    country: 'Brazil',
+                    cep: '13380-530'
                 })
             )
         );

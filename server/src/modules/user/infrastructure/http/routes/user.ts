@@ -10,7 +10,11 @@ usersRouter.post('/users', celebrate({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
-    birth: Joi.string().required()
+    gender: Joi.string().required(),
+    birth: Joi.string().required(),
+    height: Joi.number().required(),
+    country: Joi.string().required(),
+    cep: Joi.string().required()
   }
 }, { abortEarly: false }), UserController.create);
 

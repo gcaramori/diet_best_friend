@@ -43,7 +43,11 @@ describe('list all users', () => {
             name: 'tester',
             email: 'tester@gmail.com',
             password: 'password',
-            birth: new Date()
+            gender: 'male',
+            birth: new Date(),
+            height: 185,
+            country: 'Brazil',
+            cep: '13380-530'
         });
 
         const userGoals = await createUserGoalsService.execute({
@@ -54,7 +58,7 @@ describe('list all users', () => {
             proteins: 200,
             carbs: 300,
             fats: 105,
-            user_id: user.id
+            user: user.id
         });
 
         const allUsersGoals = await listAllUsersGoalsService.execute();

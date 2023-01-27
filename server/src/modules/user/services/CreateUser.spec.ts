@@ -25,10 +25,14 @@ describe('creating a new user', () => {
 
     it('should be able to create a new user', async() => {
         const user = await createUserService.execute({
-            name: 'Tester',
-            email: 'testemail@gmail.com',
-            password: 'password',
-            birth: new Date()
+          name: 'Tester',
+          email: 'testemail@gmail.com',
+          password: 'password',
+          gender: 'male',
+          birth: new Date(),
+          height: 185,
+          country: 'Brazil',
+          cep: "13380-530"
         });
 
         expect(user).toHaveProperty('id');
@@ -39,7 +43,11 @@ describe('creating a new user', () => {
           name: 'Tester',
           email: 'testemail@gmail.com',
           password: 'password',
-          birth: new Date()
+          gender: 'male',
+          birth: new Date(),
+          height: 185,
+          country: 'Brazil',
+          cep: "13380-530"
         });
     
         await expect(
@@ -47,7 +55,11 @@ describe('creating a new user', () => {
             name: 'Tester',
             email: 'testemail@gmail.com',
             password: 'password',
-            birth: new Date()
+            gender: 'male',
+            birth: new Date(),
+            height: 185,
+            country: 'Brazil',
+            cep: "13380-530"
           })
         ).rejects.toBeInstanceOf(ErrorHandler);
       });

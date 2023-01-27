@@ -13,7 +13,7 @@ class FakeUserGoalsRepo implements IUserGoalsRepository {
         carbs,
         proteins,
         fats,
-        user_id
+        user
     }: ICreateUserGoalsDTO): Promise<Goals> {
         const userGoals = new Goals();
 
@@ -25,7 +25,7 @@ class FakeUserGoalsRepo implements IUserGoalsRepository {
             carbs,
             proteins,
             fats,
-            user_id
+            user
         });
 
         this.userGoals.push(userGoals);
@@ -34,7 +34,7 @@ class FakeUserGoalsRepo implements IUserGoalsRepository {
     }
     
     public async save(userGoals: Goals): Promise<Goals> {
-        const findIndex = this.userGoals.findIndex(goal => goal.user.id === userGoals.user.id);
+        const findIndex = this.userGoals.findIndex(goal => goal.user === userGoals.user);
 
         this.userGoals[findIndex] = userGoals;
 
@@ -48,7 +48,7 @@ class FakeUserGoalsRepo implements IUserGoalsRepository {
     }
 
     public async findByUserId(id: string): Promise<Goals | undefined> {
-        const user = this.userGoals.find(goal => goal.user.id === id);
+        const user = this.userGoals.find(goal => goal.user === id);
 
         return user;
     }

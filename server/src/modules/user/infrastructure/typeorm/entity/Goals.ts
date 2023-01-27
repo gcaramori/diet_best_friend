@@ -36,7 +36,7 @@ class Goals {
     @DeleteDateColumn()
     deleted_at: Date;
 
-    @OneToOne(type => User)
+    @OneToOne(() => User)
     @JoinColumn()
     user: User
 }

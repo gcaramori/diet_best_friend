@@ -18,8 +18,8 @@ class UserGoalsRepo implements IUserGoalsRepository {
         return userGoals;
     }
 
-    public async save(user: Goals): Promise<Goals> {
-        return this.ormRepository.save(user);
+    public async save(goals: Goals): Promise<Goals> {
+        return this.ormRepository.save(goals);
     }
 
     public async findById(id: string): Promise<Goals | undefined> {
@@ -39,7 +39,11 @@ class UserGoalsRepo implements IUserGoalsRepository {
     }
     
     public async findAll(): Promise<Goals[] | undefined> {
-        const users = await this.ormRepository.find();
+        const users = await this.ormRepository
+            .createQueryBuilder('goals')
+            .innerJoinAndSelect('goals.user', 'users')
+            .where('goals.user = users.id')
+            .getMany();
 
         return users;
     }

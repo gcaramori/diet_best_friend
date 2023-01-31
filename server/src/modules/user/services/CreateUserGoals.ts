@@ -47,7 +47,7 @@ class CreateUserGoalsService {
             goal_weight,
             calories,
             proteins,
-            carbs, 
+            carbs,
             fats,
             user
         });

@@ -17,5 +17,6 @@ routes.post('/session', sessionRouter);
 
 routes.get('/all_goals', userGoalsRouter);
 routes.post('/goals', userGoalsRouter);
+routes.put('/goals', userGoalsRouter);
 
 export default routes;

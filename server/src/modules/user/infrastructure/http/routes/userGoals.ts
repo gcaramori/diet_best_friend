@@ -19,5 +19,6 @@ userGoalsRouter.post('/goals', celebrate({
 }, { abortEarly: false }), UserGoalsController.create);
 
 userGoalsRouter.get('/all_goals', authentication, UserGoalsController.listAll);
+userGoalsRouter.put('/goals', authentication, UserGoalsController.update);
 
 export default userGoalsRouter;

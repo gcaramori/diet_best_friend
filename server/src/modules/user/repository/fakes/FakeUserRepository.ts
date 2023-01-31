@@ -10,7 +10,11 @@ class FakeUsersRepo implements IUserRepository {
         name,
         email,
         password,
-        birth
+        gender,
+        birth,
+        height,
+        country,
+        cep
     }: ICreateUserDTO): Promise<User> {
         const user = new User();
 
@@ -19,7 +23,11 @@ class FakeUsersRepo implements IUserRepository {
             name,
             email,
             password,
-            birth
+            gender,
+            birth,
+            height,
+            country,
+            cep
         });
 
         this.users.push(user);

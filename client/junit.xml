@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" errors="0" time="4.09">
-  <testsuite name="testing index file" errors="0" failures="0" skipped="0" timestamp="2023-01-10T12:52:28" time="3.852" tests="1">
-    <testcase classname="testing index file double function" name="testing index file double function" time="0.002">
-    </testcase>
-  </testsuite>
-</testsuites>

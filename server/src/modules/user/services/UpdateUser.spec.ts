@@ -3,7 +3,6 @@ import CreateUserService from "./CreateUser";
 import FakeUsersRepo from "../repository/fakes/FakeUserRepository";
 import FakeRedisCacheProvider from "@shared/container/providers/CacheProvider/fakes/FakeRedisCacheProvider";
 import FakeHashProvider from "../providers/HashProvider/fakes/FakeHashProvider";
-import ErrorHandler from "@shared/errors/ErrorHandler";
 import { describe, expect, beforeEach, it } from 'vitest';
 
 let updateUserService: UpdateUserService;
@@ -31,10 +30,14 @@ describe('updating a existing user', () => {
 
     it('should be able to update a user', async() => {
         await createUserService.execute({
-            name: `tester`,
-            email: `testermail@gmail.com`,
-            password: `test_password`,
-            birth: new Date()
+            name: 'Tester',
+            email: 'testermail@gmail.com',
+            password: 'password',
+            gender: 'male',
+            birth: new Date(),
+            height: 185,
+            country: 'Brazil',
+            cep: "13380-530"
         })
 
         const user = await updateUserService.execute({

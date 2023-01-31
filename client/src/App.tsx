@@ -1,10 +1,22 @@
+import { useContext } from 'react';
 import './App.css'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import Home from './pages/Home';
+import Login from './pages/Login';
+import { AuthContext, AuthContextType } from './contexts/AuthContext';
 
 function App() {
+  const { isAuthenticated } = useContext(AuthContext) as AuthContextType;
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: (!isAuthenticated) ? <Login /> : <Home />
+    }
+  ])
+
   return (
-    <div className="App">
-        
-    </div>
+    <RouterProvider router={router} />
   )
 }
 

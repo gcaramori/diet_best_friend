@@ -2,7 +2,8 @@ import { extendTheme } from '@chakra-ui/react'
 
 const config = {
   fonts: {
-    main: `'Raleway', 'sans-serif'`,
+    heading: `'Poppins', 'sans-serif'`,
+    body: `'Raleway', 'sans-serif'`
   },
   colors: {
     mainBlue: '#3742fa',

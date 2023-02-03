@@ -5,9 +5,10 @@ import { isCelebrateError } from 'celebrate';
 import ConnectDB from '@shared/infrastructure/typeorm/index';
 import routes from '@shared/infrastructure/http/routes';
 import ErrorHandler from '@shared/errors/ErrorHandler';
+import cors from 'cors';
 
 interface ValidationError {
-    [key: string]: string;
+  [key: string]: string;
 }
 
 const app: Express = express();
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 3001;
 
 ConnectDB();
 
+app.use(cors<Request>());
 app.use(express.json());
 app.use(routes);
 
@@ -41,8 +43,6 @@ app.use(
           errors: validateErrors
         });
       }
-
-      console.log(errors);
       
       return response.status(500).json({
         status: 'error',

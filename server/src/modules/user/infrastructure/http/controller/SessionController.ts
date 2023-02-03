@@ -5,11 +5,16 @@ import AuthenticateUserService from '@modules/user/services/AuthenticateUser';
 
 class SessionController {
     public async create(request: Request, response: Response): Promise<Response> {
-        const { email, password } = request.body;
-        const authenticateUser = container.resolve(AuthenticateUserService);
-        const { user, token } = await authenticateUser.execute({ email, password });
+        try {
+            const { email, password } = request.body;
+            const authenticateUser = container.resolve(AuthenticateUserService);
+            const { user, token } = await authenticateUser.execute({ email, password });
 
-        return response.status(200).json({ user: instanceToInstance(user), token });
+            return response.status(200).json({ user: instanceToInstance(user), token });
+        }
+        catch(err) {
+            return response.status(401).json(err);
+        }
     }
 }
 

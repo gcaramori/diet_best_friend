@@ -5,8 +5,10 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import './index.css'
 import theme from './lib/theme'
-import '@fontsource/raleway'
-import '@fontsource/poppins/600.css'
+import '@fontsource/raleway/400.css'
+import '@fontsource/raleway/700.css'
+import '@fontsource/poppins/400.css'
+import '@fontsource/poppins/700.css'
 import AuthProvider from './contexts/AuthContext'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
-import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import { Link as RouteLink } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import axios from 'axios'
 import {
   FormErrorMessage,
   FormLabel,
@@ -17,8 +18,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { AiOutlineMail, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BsArrowRight } from 'react-icons/bs'
-import { AuthContext, AuthContextType } from '../contexts/AuthContext';
-import ErrorAlert from './ErrorAlert';
+import { AuthContext, AuthContextType } from '../contexts/AuthContext'
+import SuccessAlert from './SuccessAlert'
+import ErrorAlert from './ErrorAlert'
 import SocialLogin from '../components/SocialLogin'
 
 const formSchema = z.object({
@@ -27,9 +29,14 @@ const formSchema = z.object({
 })
 
 const LoginForm: React.FC = () => {
-    const { isOpen, onClose, onOpen } = useDisclosure()
     const { grantAuthentication } = useContext(AuthContext) as AuthContextType;
+
+    const { isOpen: isErrorOpen, onClose: onErrorClose, onOpen: onErrorOpen } = useDisclosure()
+    const { isOpen: isSuccessOpen, onClose: onSuccessClose, onOpen: onSuccessOpen } = useDisclosure()
+
+    const [errorMessage, setErrorMessage] = useState('')
     const [allowSeePassword, setAllowSeePassword] = useState(false)
+    
     const {
         register,
         handleSubmit,
@@ -46,44 +53,63 @@ const LoginForm: React.FC = () => {
             password: data.password
         })
         .then(response => {
-            console.log(response)
+            if(response.data.token) {
+                const email = data.email
+                const token = response.data.token
+
+                grantAuthentication({ email, token })
+            }
         })
         .catch(err => {
-            onOpen()
+            switch(err.response.data.message) {
+                case 'User does not exists!':
+                    setErrorMessage('O usuário não foi encontrado!')
+                    break;
+                case 'Incorrect password!':
+                    setErrorMessage('A senha está incorreta!')
+                    break;
+                default:
+                    setErrorMessage(err.response.data.message)
+                    break;
+            }
+
+            onErrorOpen()
         })
     });
 
     return (
         <>
             <form onSubmit={onSubmit} id="customForm">
-                <FormControl isInvalid={errors?.email ? true : false} mb={6} position='relative'>
-                    <FormLabel htmlFor='email' fontSize={12}>Seu email</FormLabel>
+                <FormControl isInvalid={errors?.email ? true : false} mb={10} position='relative'>
+                    <FormLabel htmlFor='email' fontSize={12} color='#000'>Seu email</FormLabel>
                     <Input
                         id='email'
-                        placeholder='Seu email'
+                        placeholder='example@email.com.br'
                         rounded={12}
                         p={6}
                         borderWidth={3}
                         fontSize={14}
+                        color='#000'
                         {...register('email')}
                     />
                     <Box position='absolute' top='2.7em' right={4} color='#aaa'>
                         <AiOutlineMail size='1em' />
                     </Box>
-                    <FormErrorMessage fontSize={13}>
+                    <FormErrorMessage fontSize={13} position='absolute' bottom='-25px' left={2}>
                         {errors?.email  ? 'Digite seu email corretamente, por favor!' : ''}
                     </FormErrorMessage>
                 </FormControl>
-                <FormControl isInvalid={errors?.password ? true : false} position='relative'>
-                    <FormLabel htmlFor='password' fontSize={12}>Sua senha</FormLabel>
+                <FormControl isInvalid={ errors?.password ? true : false } position='relative'>
+                    <FormLabel htmlFor='password' fontSize={12} color='#000'>Sua senha</FormLabel>
                     <Input
                         id='password'
                         type={ !allowSeePassword ? 'password' : 'text' }
-                        placeholder='Sua senha'
+                        placeholder='Ex1!g*G21k'
                         rounded={12}
                         p={6}
                         borderWidth={3}
                         fontSize={14}
+                        color='#000'
                         {...register('password')}
                     />
                     <Box position='absolute' top='2.7em' right={4} color='#aaa' cursor='pointer' onClick={handleSeePassword}>
@@ -91,12 +117,12 @@ const LoginForm: React.FC = () => {
                             !allowSeePassword ? <AiOutlineEye size='1em' /> : <AiOutlineEyeInvisible size='1em' />
                         }
                     </Box>
-                    <FormErrorMessage fontSize={13}>
-                        {errors?.password  ? 'Digite sua senha, por favor!' : ''}
+                    <FormErrorMessage fontSize={13} position='absolute' bottom='-25px' left={2}>
+                        { errors?.password  ? 'Digite sua senha, por favor!' : '' }
                     </FormErrorMessage>
                 </FormControl>
                 
-                <Divider my={6} />
+                <Divider mt={10} mb={6} />
 
                 <SocialLogin />
 
@@ -108,11 +134,12 @@ const LoginForm: React.FC = () => {
                 </Button>
 
                 <Box w='100%' p={2} textAlign='center' marginTop={2}>
-                    <Text fontSize={12} color='#000'>Não possui uma conta? <Link color='mainBlue'>Se registre agora mesmo!</Link></Text>
+                    <Text fontSize={12} color='#000'>Não possui uma conta? <Link as={RouteLink} to='/register' color='mainBlue'>Se registre agora mesmo!</Link></Text>
                 </Box>
             </form>
-
-            <ErrorAlert title='Oops...' message='Usuário e/ou senha incorretos!' buttonMessage='Ok' isOpen={isOpen} onClose={onClose} onOpen={onOpen} />
+            
+            <SuccessAlert title='Uhuul' message='Login realizado!' buttonMessage='Ok' isOpen={isSuccessOpen} onClose={onSuccessClose} onOpen={onSuccessOpen} />
+            <ErrorAlert title='Oops...' message={errorMessage} buttonMessage='Ok' isOpen={isErrorOpen} onClose={onErrorClose} onOpen={onErrorOpen} />
         </>
     )
 }

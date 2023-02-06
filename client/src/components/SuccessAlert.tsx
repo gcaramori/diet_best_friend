@@ -9,7 +9,7 @@ import {
     AlertDialogHeader,
     AlertDialogContent
 } from '@chakra-ui/react'
-import { BiError } from 'react-icons/bi'
+import { GiPartyPopper } from 'react-icons/gi'
 
 interface AlertProps {
     title: string,
@@ -20,22 +20,22 @@ interface AlertProps {
     onClose: () => void
 }
 
-const ErrorAlert = ({ title, message, buttonMessage, isOpen, onOpen, onClose }: AlertProps) => {
+const SuccessAlert = ({ title, message, buttonMessage, isOpen, onOpen, onClose }: AlertProps) => {
     const cancelRef = useRef(null)
 
     return (
         <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} isCentered={true}>
             <AlertDialogOverlay>
                 <AlertDialogContent w='410px' rounded='xl' overflow='hidden'>
-                    <AlertDialogHeader display='flex' alignItems='center' bg='mainRed' color='#fff' py={3} px={6} mb={4}>
-                        <BiError size='1.3em' />
+                    <AlertDialogHeader display='flex' alignItems='center' bg='mainGreen' color='#fff' py={3} px={6} mb={4}>
+                        <GiPartyPopper size='1.3em' />
                         <Text fontSize='lg' fontWeight='bold' ml={4}>{title}</Text>
                     </AlertDialogHeader>
                     <AlertDialogBody color='#000'>
                         {message}
                     </AlertDialogBody>
                     <AlertDialogFooter>
-                        <Button bg='mainRed' color='#fff' ref={cancelRef} onClick={onClose}>{buttonMessage}</Button>
+                        <Button bg='mainGreen' color='#fff' ref={cancelRef} onClick={onClose}>{buttonMessage}</Button>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialogOverlay>
@@ -43,4 +43,4 @@ const ErrorAlert = ({ title, message, buttonMessage, isOpen, onOpen, onClose }: 
     )
 }
 
-export default ErrorAlert
+export default SuccessAlert

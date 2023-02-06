@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import { setCookie, getCookie } from '../lib/utils'
 
 export interface Props {
     children: React.ReactNode
@@ -12,24 +13,40 @@ export interface IUserAuth {
 export type AuthContextType = {
     isAuthenticated: boolean | null;
     grantAuthentication: (userAuth: IUserAuth) => void;
+    resetAuthentication: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-    const [isAuthenticated, setAuth] = useState<boolean>(false)
+    const checkUserAuthCookie = () => {
+        if(getCookie('user_auth') !== false) {
+            const authCookie = JSON.parse(getCookie('user_auth').toString())
+
+            if(authCookie && authCookie.email && authCookie.token) return true
+            else return false
+        }
+        else return false
+    }
+    
+    const [isAuthenticated, setAuth] = useState<boolean>(() => checkUserAuthCookie())
     
     const grantAuthentication = (authData: IUserAuth) => {
         if(authData.token) {
+            setCookie('user_auth', JSON.stringify(authData), 1)
             setAuth(true);
         }
     }
 
-    useEffect(() => {
-        if(localStorage.getItem('user_auth') !== null) setAuth(true)
-    }, [isAuthenticated]);
+    const resetAuthentication = () => {
+        setAuth(false)
+    }
 
-    return <AuthContext.Provider value={{ isAuthenticated, grantAuthentication }}>{ children }</AuthContext.Provider>
+    useEffect(() => {
+        setAuth(checkUserAuthCookie())
+    }, [isAuthenticated])
+
+    return <AuthContext.Provider value={{ isAuthenticated, grantAuthentication, resetAuthentication }}>{ children }</AuthContext.Provider>
 }
 
 export default AuthProvider

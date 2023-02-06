@@ -13,12 +13,12 @@ import AuthProvider from './contexts/AuthContext'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <GoogleOAuthProvider clientId="990577240690-0rk8l2262b07hrpuutfg5tuj55ag2clc.apps.googleusercontent.com">
-        <AuthProvider>
+    <GoogleOAuthProvider clientId="990577240690-0rk8l2262b07hrpuutfg5tuj55ag2clc.apps.googleusercontent.com">
+      <AuthProvider>
+        <ChakraProvider theme={theme}>
           <App />
-        </AuthProvider>
-      </GoogleOAuthProvider>
-    </ChakraProvider>
+        </ChakraProvider>
+      </AuthProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 )

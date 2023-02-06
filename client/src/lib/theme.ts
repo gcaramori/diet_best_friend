@@ -7,7 +7,9 @@ const config = {
   },
   colors: {
     mainBlue: '#3742fa',
-    mainWhite: '#dff9fb'
+    mainWhite: '#dff9fb',
+    mainRed: '#c0392b',
+    mainGreen: '#27ae60'
   },
   breakpoints: {
     sm: '26em'

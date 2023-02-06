@@ -19,7 +19,6 @@ import * as z from 'zod'
 import { AiOutlineMail, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { BsArrowRight } from 'react-icons/bs'
 import { AuthContext, AuthContextType } from '../contexts/AuthContext'
-import SuccessAlert from './SuccessAlert'
 import ErrorAlert from './ErrorAlert'
 import SocialLogin from '../components/SocialLogin'
 
@@ -96,9 +95,10 @@ const LoginForm: React.FC = () => {
                         <AiOutlineMail size='1em' />
                     </Box>
                     <FormErrorMessage fontSize={13} position='absolute' bottom='-25px' left={2}>
-                        {errors?.email  ? 'Digite seu email corretamente, por favor!' : ''}
+                        { errors?.email && errors?.email?.message ? errors.email.message.toString() : '' }
                     </FormErrorMessage>
                 </FormControl>
+                
                 <FormControl isInvalid={ errors?.password ? true : false } position='relative'>
                     <FormLabel htmlFor='password' fontSize={12} color='#000'>Sua senha</FormLabel>
                     <Input
@@ -118,7 +118,7 @@ const LoginForm: React.FC = () => {
                         }
                     </Box>
                     <FormErrorMessage fontSize={13} position='absolute' bottom='-25px' left={2}>
-                        { errors?.password  ? 'Digite sua senha, por favor!' : '' }
+                        { errors?.password && errors?.password?.message ? errors.password.message.toString() : '' }
                     </FormErrorMessage>
                 </FormControl>
                 
@@ -138,7 +138,6 @@ const LoginForm: React.FC = () => {
                 </Box>
             </form>
             
-            <SuccessAlert title='Uhuul' message='Login realizado!' buttonMessage='Ok' isOpen={isSuccessOpen} onClose={onSuccessClose} onOpen={onSuccessOpen} />
             <ErrorAlert title='Oops...' message={errorMessage} buttonMessage='Ok' isOpen={isErrorOpen} onClose={onErrorClose} onOpen={onErrorOpen} />
         </>
     )

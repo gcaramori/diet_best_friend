@@ -11,9 +11,11 @@ routes.get('/', (request: Request, response: Response) => {
 
 routes.post('/users', usersRouter);
 routes.get('/users', usersRouter);
+routes.get('/users/verify_email', usersRouter);
 routes.put('/users', usersRouter);
 
 routes.post('/session', sessionRouter);
+routes.post('/session/google', sessionRouter);
 
 routes.get('/all_goals', userGoalsRouter);
 routes.post('/goals', userGoalsRouter);

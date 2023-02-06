@@ -13,7 +13,7 @@ const SocialLogin: React.FC = () => {
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => setUserData(codeResponse),
         onError: (error) => console.log('Login Failed:', error)
-    });
+    })
 
     useEffect(() => {
         if(userData?.access_token) {
@@ -23,12 +23,18 @@ const SocialLogin: React.FC = () => {
                     Accept: 'application/json'
                 }
             })
-            .then((res) => {
-                if(res.data.verified_email) {
-                    const email = res.data.email
-                    const token = userData.access_token
+            .then((googleResponse) => {
+                if(googleResponse.data.email && googleResponse.data.verified_email) {
+                    axios.post('http://localhost:3001/session/google', {
+                        email: googleResponse.data.email,
+                        verified_email: googleResponse.data.verified_email
+                    })
+                    .then((tokenResponse) => {
+                        const email = tokenResponse.data.user.email
+                        const token = tokenResponse.data.token
 
-                    grantAuthentication({ email, token })
+                        grantAuthentication({ email, token })
+                    })
                 }
             })
             .catch((err) => console.log(err))

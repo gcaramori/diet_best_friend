@@ -11,4 +11,11 @@ sessionRouter.post('/session', celebrate({
     }
 }, { abortEarly: false }), SessionController.create);
 
+sessionRouter.post('/session/google', celebrate({
+    [Segments.BODY]: {
+        email: Joi.string().email().required(),
+        verified_email: Joi.boolean().required()
+    }
+}, { abortEarly: false }), SessionController.createWithGoogle);
+
 export default sessionRouter;

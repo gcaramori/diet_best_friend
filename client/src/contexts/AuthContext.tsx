@@ -32,7 +32,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     const [isAuthenticated, setAuth] = useState<boolean>(() => checkUserAuthCookie())
     
     const grantAuthentication = (authData: IUserAuth) => {
-        if(authData.token) {
+        if(authData.email && authData.token) {
             setCookie('user_auth', JSON.stringify(authData), 1)
             setAuth(true);
         }

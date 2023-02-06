@@ -3,6 +3,7 @@ import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import { AuthContext, AuthContextType } from './contexts/AuthContext';
 
 function App() {
@@ -12,6 +13,10 @@ function App() {
     {
       path: '/',
       element: (!isAuthenticated) ? <Login /> : <Home />
+    },
+    {
+      path: '/register',
+      element: <Register />
     }
   ])
 

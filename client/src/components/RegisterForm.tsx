@@ -29,10 +29,7 @@ const formSchema = z.object({
     email: z.string().regex(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, { message: 'Digite seu email corretamente, por favor!' }),
     password: z.string().min(1, { message: 'Digite sua senha, por favor!' }),
     gender: z.string().min(3, { message: 'Escolha seu gênero, por favor!' }),
-    birth: z
-    .date()
-    .min(new Date("1900-01-01"), { message: "Escolha a data de nascimento corretamente, por favor!" })
-    .max(new Date(), { message: "Escolha a data de nascimento corretamente, por favor!" }),
+    birth: z.preprocess((a) => new Date(z.string().parse(a)), z.date()),
     height: z
     .number()
     .min(100, { message: 'Digite a altura corretamente, em centímetros, por favor!' })
@@ -60,23 +57,23 @@ const RegisterForm: React.FC = () => {
     }
 
     const onSubmit = handleSubmit(data => {
-        axios.post('http://localhost:3001/session', { 
-            email: data.email,
-            password: data.password
-        })
-        .then(response => {
-            console.log(response)
-        })
-        .catch(err => {
-            console.log(err.response.data)
-            switch(err.response.data.message) {
-                default:
-                    setErrorMessage(err.response.data.message)
-                    break;
-            }
+        console.log(data)
+        // axios.post('http://localhost:3001/users', { 
+        //     ...data
+        // })
+        // .then(response => {
+        //     console.log(response)
+        // })
+        // .catch(err => {
+        //     console.log(err.response.data)
+        //     switch(err.response.data.message) {
+        //         default:
+        //             setErrorMessage(err.response.data.message)
+        //             break;
+        //     }
 
-            onErrorOpen()
-        })
+        //     onErrorOpen()
+        // })
     });
 
     return (
@@ -165,7 +162,7 @@ const RegisterForm: React.FC = () => {
                     </FormControl>
                 </Stack>
                 
-                <Stack direction='row' align='center' mb={10}>
+                <Stack direction='row' align='flex-start' mb={10}>
                     <FormControl isInvalid={errors?.gender ? true : false} position='relative'>
                         <FormLabel htmlFor='gender' fontSize={12} color='#000'>Seu gênero</FormLabel>
                         <RadioGroup name="gender" onChange={setGender} value={gender}>
@@ -210,7 +207,6 @@ const RegisterForm: React.FC = () => {
                         <Select
                             id='country'
                             rounded={12}
-                            p={6}
                             borderWidth={3}
                             fontSize={14}
                             color='#000'

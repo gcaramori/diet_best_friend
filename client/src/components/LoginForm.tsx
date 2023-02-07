@@ -33,8 +33,8 @@ const LoginForm: React.FC = () => {
     const { isOpen: isErrorOpen, onClose: onErrorClose, onOpen: onErrorOpen } = useDisclosure()
     const { isOpen: isSuccessOpen, onClose: onSuccessClose, onOpen: onSuccessOpen } = useDisclosure()
 
-    const [errorMessage, setErrorMessage] = useState('')
-    const [allowSeePassword, setAllowSeePassword] = useState(false)
+    const [errorMessage, setErrorMessage] = useState<string>('')
+    const [allowSeePassword, setAllowSeePassword] = useState<boolean>(false)
     
     const {
         register,

@@ -14,7 +14,7 @@ usersRouter.post('/users', celebrate({
     birth: Joi.string().required(),
     height: Joi.number().required(),
     country: Joi.string().required(),
-    cep: Joi.string().required()
+    city: Joi.string().required()
   }
 }, { abortEarly: false }), UserController.create);
 

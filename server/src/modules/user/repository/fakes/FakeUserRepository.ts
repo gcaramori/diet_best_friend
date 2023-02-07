@@ -14,7 +14,7 @@ class FakeUsersRepo implements IUserRepository {
         birth,
         height,
         country,
-        cep
+        city
     }: ICreateUserDTO): Promise<User> {
         const user = new User();
 
@@ -27,7 +27,7 @@ class FakeUsersRepo implements IUserRepository {
             birth,
             height,
             country,
-            cep
+            city
         });
 
         this.users.push(user);

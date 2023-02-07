@@ -6,5 +6,5 @@ export default interface ICreateUserDTO {
     birth: Date,
     height: number,
     country: string,
-    cep: string
+    city: string
 }

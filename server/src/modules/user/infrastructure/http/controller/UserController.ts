@@ -8,9 +8,9 @@ import UpdateUserService from '@modules/user/services/UpdateUser';
 class UserController {
     public async create(request: Request, response: Response): Promise<Response> {
         try {
-            const { name, email, password, gender, birth, height, country, cep } = request.body;
+            const { name, email, password, gender, birth, height, country, city } = request.body;
             const createUser = container.resolve(CreateUserService);
-            const user = await createUser.execute({ name, email, password, gender, birth, height, country, cep });
+            const user = await createUser.execute({ name, email, password, gender, birth, height, country, city });
             
             return response.status(200).json(instanceToInstance(user));
         }

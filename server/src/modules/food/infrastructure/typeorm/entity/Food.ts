@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
-import { Exclude } from 'class-transformer';
 
 @Entity('users')
 class User {
@@ -10,26 +9,16 @@ class User {
     name: string;
 
     @Column('varchar')
-    email: string;
+    brand: string;
 
     @Column('varchar')
-    @Exclude()
-    password: string;
-
-    @Column('varchar')
-    gender: string;
-
-    @Column('datetime')
-    birth: Date;
+    portion_size: string;
 
     @Column('int')
-    height: number;
+    portion: number;
 
-    @Column('varchar')
-    country: string;
-
-    @Column('varchar')
-    city: string;
+    @Column('json')
+    extra_information: object;
 
     @CreateDateColumn()
     created_at: Date;

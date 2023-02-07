@@ -32,7 +32,7 @@ describe('creating a new user', () => {
           birth: new Date(),
           height: 185,
           country: 'Brazil',
-          cep: "13380-530"
+          city: "Nova Odessa"
         });
 
         expect(user).toHaveProperty('id');
@@ -47,7 +47,7 @@ describe('creating a new user', () => {
           birth: new Date(),
           height: 185,
           country: 'Brazil',
-          cep: "13380-530"
+          city: "Nova Odessa"
         });
     
         await expect(
@@ -59,7 +59,7 @@ describe('creating a new user', () => {
             birth: new Date(),
             height: 185,
             country: 'Brazil',
-            cep: "13380-530"
+            city: "Nova Odessa"
           })
         ).rejects.toBeInstanceOf(ErrorHandler);
       });

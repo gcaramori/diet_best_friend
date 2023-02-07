@@ -1,12 +1,12 @@
 import React from 'react';
 import { Flex, Link, Heading } from '@chakra-ui/react'
-import LogoutButton from '../components/LogoutButton';
+import Sidebar from '../components/Sidebar';
+import { motion } from 'framer-motion'
 
 const Home: React.FC = () => {
     return (
-        <Flex direction='column' justifyContent='center' alignItems='center' p={4}>
-            <Heading as='h1' mb={10}>Bem-vindo Guilherme</Heading>
-            <LogoutButton />
+        <Flex as={motion.div} initial={{ 'opacity': 0 }} animate={{ 'opacity': 1 }} w='100%' h='100%' direction='column' justifyContent='center' alignItems='flex-start'>
+            <Sidebar />
         </Flex>
     )
 }

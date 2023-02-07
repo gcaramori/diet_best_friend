@@ -14,7 +14,7 @@ interface IRequest {
     birth: Date,
     height: number,
     country: string,
-    cep: string
+    city: string
 };
 
 @injectable()
@@ -33,7 +33,7 @@ class CreateUserService {
         this.cacheProvider = cacheProvider;
     }
 
-    public async execute({ name, email, password, gender, birth, height, country, cep }: IRequest): Promise<User> {
+    public async execute({ name, email, password, gender, birth, height, country, city }: IRequest): Promise<User> {
         if(await this.userRepo.findByEmail(email)) {
             throw new ErrorHandler('Email already in use', 401);
         }
@@ -47,7 +47,7 @@ class CreateUserService {
             birth,
             height,
             country,
-            cep
+            city
         });
 
         await this.cacheProvider.invalidate('users-list');

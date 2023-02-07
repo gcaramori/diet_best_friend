@@ -20,22 +20,47 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { AiOutlineMail, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-import { BsArrowRight, BsFillPersonFill, BsGenderAmbiguous } from 'react-icons/bs'
-import SuccessAlert from './SuccessAlert'
+import { BsArrowRight, BsFillPersonFill } from 'react-icons/bs'
+import SuccessAlertWithRedirect from './SuccessAlertWithRedirect'
 import ErrorAlert from './ErrorAlert'
 
 const formSchema = z.object({
     name: z.string().min(4, { message: 'Digite seu nome, por favor!' }),
     email: z.string().regex(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, { message: 'Digite seu email corretamente, por favor!' }),
     password: z.string().min(1, { message: 'Digite sua senha, por favor!' }),
-    gender: z.string().min(3, { message: 'Escolha seu gênero, por favor!' }),
-    birth: z.preprocess((a) => new Date(z.string().parse(a)), z.date()),
-    height: z
-    .number()
-    .min(100, { message: 'Digite a altura corretamente, em centímetros, por favor!' })
-    .max(250, { message: 'Digite a altura corretamente, em centímetros, por favor!' }),
-    country: z.string().min(4, { message: 'Escolha o país, por favor!' }),
-    city: z.string().min(8, { message: 'Digite a cidade, por favor!' })
+    gender: z.string({
+        errorMap: (issue, _ctx) => {
+            switch(issue.code) {
+              default:
+                return { message: 'Escolha seu gênero, por favor!' };
+            }
+        }
+    }),
+    birth: z.coerce.date({
+        errorMap: (issue, _ctx) => {
+            switch(issue.code) {
+              default:
+                return { message: 'Escolha a data de nascimento, por favor!' };
+            }
+        }
+    }),
+    height: z.coerce.number({
+        errorMap: (issue, _ctx) => {
+            switch(issue.code) {
+              default:
+                return { message: 'Digite sua altura, por favor!' };
+            }
+        }
+    }).min(100, { message: 'Digite sua altura corretamente, por favor!' }).max(250, { message: 'Digite sua altura corretamente, por favor!' }),
+    country: z.string({
+        errorMap: (issue, _ctx) => {
+            switch(issue.code) {
+              default:
+                return { message: 'Escolha seu país, por favor!' };
+            }
+        }
+    }).min(5, { message: 'Escolha seu país, por favor!' }),
+    city: z.string().min(5, { message: 'Digite a cidade, por favor!' })
 })
 
 const RegisterForm: React.FC = () => {
@@ -57,23 +82,32 @@ const RegisterForm: React.FC = () => {
     }
 
     const onSubmit = handleSubmit(data => {
-        console.log(data)
-        // axios.post('http://localhost:3001/users', { 
-        //     ...data
-        // })
-        // .then(response => {
-        //     console.log(response)
-        // })
-        // .catch(err => {
-        //     console.log(err.response.data)
-        //     switch(err.response.data.message) {
-        //         default:
-        //             setErrorMessage(err.response.data.message)
-        //             break;
-        //     }
+        axios.post('http://localhost:3001/users', { 
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            birth: data.birth,
+            gender: data.gender,
+            height: data.height,
+            country: data.country,
+            city: data.city
+        })
+        .then(response => {
+            onSuccessOpen()
+        })
+        .catch(err => {
+            console.log(err)
+            switch(err.response.data.message) {
+                case 'Email already in use':
+                    setErrorMessage('O email já está sendo usado por outra pessoa!')
+                    break;
+                default:
+                    setErrorMessage(err.response.data.message)
+                    break;
+            }
 
-        //     onErrorOpen()
-        // })
+            onErrorOpen()
+        })
     });
 
     return (
@@ -212,13 +246,14 @@ const RegisterForm: React.FC = () => {
                             color='#000'
                             size='lg'
                             {...register('country')}
+                            placeholder="Escolha um país"
                         >
-                            <option value='Brasil'>Brazil</option>
-                            <option value='EUA'>EUA</option>
-                            <option value='Inglaterra'>Inglaterra</option>
+                            <option style={{ 'padding': '1.2rem', 'fontSize': '1rem', 'fontWeight': '500' }} value='Brasil'>Brazil</option>
+                            <option style={{ 'padding': '1.2rem', 'fontSize': '1rem', 'fontWeight': '500' }} value='EUA'>EUA</option>
+                            <option style={{ 'padding': '1.2rem', 'fontSize': '1rem', 'fontWeight': '500' }} value='Inglaterra'>Inglaterra</option>
                         </Select>
                         <FormErrorMessage fontSize={13} position='absolute' bottom='-25px' left={2}>
-                            { errors?.height && errors?.country?.message ? errors.country.message.toString() : '' }
+                            { errors?.country && errors?.country?.message ? errors.country.message.toString() : '' }
                         </FormErrorMessage>
                     </FormControl>
 
@@ -254,7 +289,7 @@ const RegisterForm: React.FC = () => {
                 </Box>
             </form>
             
-            <SuccessAlert title='Uhuul' message='Cadastro realizado com sucesso!' buttonMessage='Ok' isOpen={isSuccessOpen} onClose={onSuccessClose} onOpen={onSuccessOpen} />
+            <SuccessAlertWithRedirect title='Uhuul' message='Cadastro realizado com sucesso!' linkToRedirect='/' buttonMessage='Fazer login' isOpen={isSuccessOpen} onClose={onSuccessClose} onOpen={onSuccessOpen} />
             <ErrorAlert title='Oops...' message={errorMessage} buttonMessage='Ok' isOpen={isErrorOpen} onClose={onErrorClose} onOpen={onErrorOpen} />
         </>
     )

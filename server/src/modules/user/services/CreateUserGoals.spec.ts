@@ -42,7 +42,7 @@ describe('creating user goals', () => {
             birth: new Date(),
             height: 185,
             country: 'Brazil',
-            cep: "13380-530"
+            city: "13380-530"
         });
 
         const userGoals = await createUserGoalsService.execute({
@@ -69,7 +69,7 @@ describe('creating user goals', () => {
             birth: new Date(),
             height: 185,
             country: 'Brazil',
-            cep: "13380-530"
+            city: "13380-530"
         });
 
         await createUserGoalsService.execute({

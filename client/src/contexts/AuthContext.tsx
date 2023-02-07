@@ -23,7 +23,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         if(getCookie('user_auth') !== false) {
             const authCookie = JSON.parse(getCookie('user_auth').toString())
 
-            if(authCookie && authCookie.email && authCookie.token) return true
+            if(authCookie?.email && authCookie?.token) return true
             else return false
         }
         else return false

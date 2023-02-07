@@ -37,7 +37,7 @@ describe('updating a existing user', () => {
             birth: new Date(),
             height: 185,
             country: 'Brazil',
-            cep: "13380-530"
+            city: "13380-530"
         })
 
         const user = await updateUserService.execute({

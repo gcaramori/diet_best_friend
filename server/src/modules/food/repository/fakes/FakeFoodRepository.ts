@@ -11,6 +11,7 @@ class FakeFoodsRepo implements IFoodRepository {
         brand,
         portion_size,
         portion,
+        calories,
         extra_information
     }: ICreateFoodDTO): Promise<Food> {
         const food = new Food();
@@ -21,6 +22,7 @@ class FakeFoodsRepo implements IFoodRepository {
             brand,
             portion_size,
             portion,
+            calories,
             extra_information
         });
 
@@ -43,16 +45,16 @@ class FakeFoodsRepo implements IFoodRepository {
         return food;
     }
 
-    public async findByName(name: string): Promise<Food | undefined> {
-        const food = this.foods.find(food => food.name === name);
+    public async findByName(name: string): Promise<Food[] | undefined> {
+        const foods = this.foods.filter(food => food.name === name);
 
-        return food;
+        return foods;
     }
 
-    public async findByBrand(brand: string): Promise<Food | undefined> {
-        const food = this.foods.find(food => food.brand === brand);
+    public async findByBrand(brand: string): Promise<Food[] | undefined> {
+        const foods = this.foods.filter(food => food.brand === brand);
 
-        return food;
+        return foods;
     }
 
     public async findAll(): Promise<Food[] | undefined> {

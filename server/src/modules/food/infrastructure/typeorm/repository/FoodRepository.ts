@@ -11,45 +11,45 @@ class FoodRepo implements IFoodRepository {
         this.ormRepository = ormConfig.getRepository(Food);
     }
 
-    public async create(FoodData: ICreateFoodDTO): Promise<Food> {
-        const food = this.ormRepository.create(FoodData);
+    public async create(foodData: ICreateFoodDTO): Promise<Food> {
+        const food = this.ormRepository.create(foodData);
         const returnedFood = await this.ormRepository.save(food);
     
         return returnedFood;
     }
 
-    public async save(Food: Food): Promise<Food> {
-        return this.ormRepository.save(Food);
+    public async save(food: Food): Promise<Food> {
+        return this.ormRepository.save(food);
     }
 
     public async findById(id: string): Promise<Food | undefined> {
-        const Food = await this.ormRepository.findOne({
+        const food = await this.ormRepository.findOne({
            where: { id: id }
         }) || undefined;
     
-        return Food;
+        return food;
     }
     
-    public async findByName(name: string): Promise<Food | undefined> {
-        const Food = await this.ormRepository.findOne({
+    public async findByName(name: string): Promise<Food[] | undefined> {
+        const foods = await this.ormRepository.find({
           where: { name: name }
         }) || undefined;
     
-        return Food;
+        return foods;
     }
 
-    public async findByBrand(brand: string): Promise<Food | undefined> {
-        const Food = await this.ormRepository.findOne({
+    public async findByBrand(brand: string): Promise<Food[] | undefined> {
+        const foods = await this.ormRepository.find({
           where: { brand: brand }
         }) || undefined;
     
-        return Food;
+        return foods;
     }
     
     public async findAll(): Promise<Food[] | undefined> {
-        const Foods = await this.ormRepository.find();
+        const foods = await this.ormRepository.find();
 
-        return Foods;
+        return foods;
     }
 }
 

@@ -43,11 +43,11 @@ describe('updating a existing user', () => {
         const user = await updateUserService.execute({
             email: "testermail@gmail.com",
             payload: {
-                name: "Guilhermino",
+                name: "Guilherme",
                 birth: new Date()
             }
         });
 
-        expect(user).toHaveProperty('email');
+        expect(user.name).not.toBe('Tester');
     });
 });

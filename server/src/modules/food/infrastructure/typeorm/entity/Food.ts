@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
 
-@Entity('users')
-class User {
+@Entity('foods')
+class Food {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
@@ -30,4 +30,4 @@ class User {
     deleted_at: Date;
 }
 
-export default User;
+export default Food;

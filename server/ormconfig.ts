@@ -11,6 +11,7 @@ const ormConfig = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     logging: true,
+    synchronize: true,
     migrations: ["./src/shared/infrastructure/typeorm/migrations/*.ts"],
     entities: ["./src/modules/**/infrastructure/typeorm/entity/*.ts"]
 });

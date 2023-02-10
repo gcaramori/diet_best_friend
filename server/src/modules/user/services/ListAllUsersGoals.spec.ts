@@ -10,30 +10,30 @@ import ListAllUsersGoalsService from "./ListAllUsersGoals";
 let listAllUsersGoalsService: ListAllUsersGoalsService;
 let createUserService: CreateUserService;
 let createUserGoalsService: CreateUserGoalsService;
-let userGoalsRepo: FakeUserGoalsRepo;
-let usersRepo: FakeUsersRepo;
+let fakeUserGoalsRepo: FakeUserGoalsRepo;
+let fakeUsersRepo: FakeUsersRepo;
 let fakeCacheProvider: FakeRedisCacheProvider;
 let fakeHashProvider: FakeHashProvider;
 
 describe('list all users', () => {
     beforeEach(() => {
-        userGoalsRepo = new FakeUserGoalsRepo;
-        usersRepo = new FakeUsersRepo;
+        fakeUserGoalsRepo = new FakeUserGoalsRepo;
+        fakeUsersRepo = new FakeUsersRepo;
         fakeHashProvider = new FakeHashProvider;
         fakeCacheProvider = new FakeRedisCacheProvider;
 
         createUserService = new CreateUserService(
-            usersRepo,
+            fakeUsersRepo,
             fakeHashProvider,
             fakeCacheProvider
         );
         createUserGoalsService = new CreateUserGoalsService(
-            usersRepo,
-            userGoalsRepo,
+            fakeUsersRepo,
+            fakeUserGoalsRepo,
             fakeCacheProvider
         );
         listAllUsersGoalsService = new ListAllUsersGoalsService(
-            userGoalsRepo,
+            fakeUserGoalsRepo,
             fakeCacheProvider
         );
     });

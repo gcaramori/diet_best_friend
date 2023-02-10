@@ -4,22 +4,22 @@ import CreateFoodService from './CreateFood';
 import ListAllFoodsService from './ListAllFoods';
 import FakeRedisCacheProvider from "@shared/container/providers/CacheProvider/fakes/FakeRedisCacheProvider";
 
-let foodsRepo: FakeFoodsRepo;
+let fakeFoodsRepo: FakeFoodsRepo;
 let fakeCacheProvider: FakeRedisCacheProvider;
 let createFoodService: CreateFoodService;
 let listAllFoodsService: ListAllFoodsService;
 
 describe('list all foods', () => {
     beforeEach(() => {
-        foodsRepo = new FakeFoodsRepo;
+        fakeFoodsRepo = new FakeFoodsRepo;
         fakeCacheProvider = new FakeRedisCacheProvider;
 
         createFoodService = new CreateFoodService(
-            foodsRepo,
+            fakeFoodsRepo,
             fakeCacheProvider
         );
         listAllFoodsService = new ListAllFoodsService(
-            foodsRepo,
+            fakeFoodsRepo,
             fakeCacheProvider
         );
     });

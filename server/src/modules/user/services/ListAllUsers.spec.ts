@@ -7,23 +7,23 @@ import { describe, expect, beforeEach, it } from 'vitest';
 
 let listAllUsersService: ListAllUsersService;
 let createUserService: CreateUserService;
-let usersRepository: FakeUsersRepo;
+let fakeUsersRepository: FakeUsersRepo;
 let fakeCacheProvider: FakeRedisCacheProvider;
 let fakeHashProvider: FakeHashProvider;
 
 describe('list all users', () => {
     beforeEach(() => {
-        usersRepository = new FakeUsersRepo;
+        fakeUsersRepository = new FakeUsersRepo;
         fakeHashProvider = new FakeHashProvider;
         fakeCacheProvider = new FakeRedisCacheProvider;
 
         createUserService = new CreateUserService(
-            usersRepository,
+            fakeUsersRepository,
             fakeHashProvider,
             fakeCacheProvider
         );
         listAllUsersService = new ListAllUsersService(
-            usersRepository,
+            fakeUsersRepository,
             fakeCacheProvider
         );
     });

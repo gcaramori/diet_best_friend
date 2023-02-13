@@ -5,7 +5,12 @@ import { getCookie, deleteCookie } from '../lib/utils'
 import { redirect } from "react-router-dom"
 import { AuthContext, AuthContextType } from '../contexts/AuthContext'
 
-const LogoutButton: React.FC = () => {
+type StyleProps = {
+    color: string;
+    fontSize: number;
+}
+
+const LogoutButton = ({ color, fontSize }: StyleProps) => {
     const { resetAuthentication } = useContext(AuthContext) as AuthContextType;
 
     const logout = () => {
@@ -19,9 +24,9 @@ const LogoutButton: React.FC = () => {
     }
 
     return (
-        <Button bg='transparent' color='#000' border='none' _hover={{ bg: 'transparent' }} onClick={logout}>
+        <Button bg='transparent' color={color} border='none' _hover={{ bg: 'transparent' }} onClick={logout}>
             <HiLogout size='1.5em' />
-            <Text fontSize={14} color='#000' ml={2}>Sair</Text>
+            <Text fontSize={fontSize} color={color} ml={2}>Sair</Text>
         </Button>
     )
 }

@@ -34,9 +34,9 @@ class Routine {
     @ManyToOne(() => User, (user) => user.id)
     user: User
 
-    // @ManyToMany(() => Food)
-    // @JoinTable()
-    // food: Food[]
+    @ManyToMany(() => Food)
+    @JoinTable()
+    food: Food[]
 }
 
 export default Routine;
